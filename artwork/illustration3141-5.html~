@@ -1,0 +1,12 @@
+---
+layout: artwork
+---
+
+{% assign section_art_name="IllustrationsRoman" %}
+{% include artwork-menu.html %}
+<div class="artwork-elements">
+    <div class="contenu">
+        <p>Illustration du cinquième chapitre de <i>3141 kilomètres</i>. On recconaîtra la <b>légère</b> référence vidéoludique.</p>
+        <img class="img-grand" src="/images/Num 5.jpg"/>
+    </div>
+</div>

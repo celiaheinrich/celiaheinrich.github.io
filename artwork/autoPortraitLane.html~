@@ -1,0 +1,10 @@
+---
+layout: artwork
+---
+
+{% assign section_art_name="AutoPortraits" %}
+{% include artwork-menu.html %}
+<div class="contenu">
+    <p>Ce petit portrait, je l'ai réalisé après avoir revisionné l'intégralité des épisodes de Daria. Je me sens plus proche de l'héroïne de la série que de Jane, mais ce personnage me plaît beaucoup.</p>
+    <img class="img-grand" src="/images/Celia Lane.png"/>
+</div>

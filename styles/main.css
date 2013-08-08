@@ -1,0 +1,361 @@
+html, body {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#header {
+  background: #323232;
+}
+#header h1 {
+  margin: 0;
+  padding: 20px 30px;
+  font-family: 'Love Ya Like A Sister', cursive;
+  font-size: 55px;
+  text-transform: uppercase;
+  font-weight:normal;
+  color: white;
+}
+#header p {
+  padding: 0 0 20px 50px;
+  margin: 0;
+  font-family: 'Love Ya Like A Sister', cursive;
+  font-size: 40px;
+  color: grey;
+}
+
+
+#content {
+  min-height: 700px;
+  width: 960px;
+  margin: 40px auto;
+  background: #f1edea;
+}
+#content .tabs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: white;
+}
+#content .tabs:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+#content .tabs li {
+  float: left;
+  width: 155px;
+  background: #e2ddd7;
+  color: #6d665e;
+  font-family: 'Annie Use Your Telescope', cursive;
+  text-align: center;
+  margin-right: 6px;
+  font-size: 30px;
+  border-radius: 6px 6px 0 0;
+}
+#content .tabs li:last-child {
+  margin-right: 0;
+}
+#content .tabs li.selected {
+  background: #cbc1b7;
+}
+
+#content .artwork-menu li.selected {
+  background: #cbc1b7;
+}
+
+#content .tabs li a {
+  color: inherit;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  padding: 15px 0;
+  display: block;
+}
+#content .main {
+  background: grey;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  background: #666;
+  text-align: center;
+  color: #e2ddd7;
+  padding: 5px 0;
+  width: 100%;
+}
+
+#content .ecrits {
+  width: 945px;
+  padding-left: 15px;
+}
+
+#content .ecrits a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#content .ecrits:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+
+#content .ecrit {
+  border: 2px solid rgba(0,0,0,0);
+  list-style: none;
+  position: relative;
+  float: left;
+  width: 296px;
+  height: 206px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+#content .ecrit h3 {
+  position: absolute;
+  top : 0;
+  margin-top : 0;
+  width: 100%;
+  font-family: 'Text Me One', cursive;
+  font-size: 18px;
+  color: white;
+  text-align: center;
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
+  border-radius: 12px 12px 0 0;
+  padding: 10px 0;
+}
+
+#content .ecrit img{
+  width: 100%;
+  height: 100%;
+}
+
+#content .badges{
+  position: absolute;
+  display: none;
+  padding: 0;
+  bottom: 0;
+  right: 0;
+  /*width: 100%;*/
+}
+
+#content .ecrit:hover .badges{
+  display: block;
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
+  padding: 5px 5px 0;
+  border-radius:  0 0 12px 0;
+}
+
+
+#content .ecrit.futur {
+    border: 2px dashed #CCCCCC;
+    border-radius: 12px 12px 12px 12px;
+}
+
+#content .ecrit.futur img{
+    opacity: 0.5;
+}
+
+
+#content .badges li{
+  list-style: none;
+  /*float: right;*/
+}
+
+#content .badges li img {
+  height: 24px;
+  width: 24px;
+}
+
+#content .img-texte{
+  width: 300px;
+  height: 210px;
+  float: right;
+  margin: 0  0 0 15px;
+}
+
+#content .caracteristiques-ecrit li{
+  list-style: none;
+  font-style:italic
+}
+
+#content .contenu{
+  padding: 20px 20px;
+  font-family: 'Text Me One', cursive;
+  text-align: justify;
+  color: #6d665e;
+  font-size: 20px;
+}
+
+#content .intro{
+  padding: 20px 20px  0 20px;
+  font-family: 'Text Me One', cursive;
+  text-align: justify;
+  color: #6d665e;
+  font-size: 20px;
+}
+
+
+#content .artwork-menu {
+  float: left;
+  list-style: none;
+  margin: 15px 0;
+  padding: 0;
+}
+
+#content .artwork-menu li {
+  float: top;
+  width: 180px;
+  background: #e2ddd7;
+  color: #6d665e;
+  text-align: center;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  font-size: 25px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+#content .artwork-menu li a {
+  color: inherit;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  padding: 15px 0;
+  display: block;
+}
+
+
+#content .artwork-elements {
+  overflow:hidden;
+}
+
+#content .miniature {
+  float: left;
+  width: 200px;
+  height: 200px;
+  margin: 10px 10px 0 0;
+}
+
+#content .miniature img {
+  max-width: 200px;
+  max-height: 200px;
+  display: block;
+  margin: 0 auto;
+
+
+}
+
+#content .miniatures-artwork:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+#content .img-profil {
+  float: left;
+  margin: 30px 20px 3px 20px;
+  max-width: 300px;
+  max-height: 300px;
+
+}
+
+#content .img-grand {
+  max-width: 700px;
+  max-height: 700px;
+  display: block;
+  margin: 0 auto;
+}
+
+#content .img-moyen {
+  max-width: 400px;
+  max-height: 400px;
+  display: block;
+  margin: 0 auto;
+}
+
+
+
+
+#content .rubrique {
+  border: 2px solid rgba(203,193,183,255);
+  border-radius: 12px 12px 12px 12px;
+  list-style: none;
+  position: relative;
+  float: left;
+  width: 398px;
+  height: 240px;
+  background: #e2ddd7;
+  color: #6d665e;
+  margin-right: 30px;
+  margin-bottom: 15px;
+}
+
+
+#content .rubriques:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+#content .rubrique h3{
+  text-align: center;
+}
+
+#content .rubrique p{
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+#content .rubrique a{
+  bottom : 20px;
+  left: 15px;
+  position: absolute;
+  float: bottom;
+}
+
+#content .citation{
+  padding : 0 100px;
+}
+
+#content .parcours{
+  padding: 20px 20px;
+  font-family: 'Text Me One', cursive;
+  text-align: justify;
+  color: #6d665e;
+  font-size: 18px;
+}
+
+#content .ensemble-formation {
+  border: 2px dashed rgba(203,193,183,255);
+  border-radius: 12px 12px 12px 12px;
+  list-style: none;
+  background: #e2ddd7;
+  color: #6d665e;
+  padding: 10px;
+  margin: 15px;
+}
+
+
+#content .img-beyond{
+  max-width: 300px;
+    border-radius: 12px 12px 12px 12px;
+  float: right;
+  margin: 0  0 0 15px;
+}
+
+#content .img-galerie{
+  width: 300px;
+
+}
+
+.img-header{
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  float: right;
+  width: 180px;
+
+}

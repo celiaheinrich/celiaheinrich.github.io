@@ -1,0 +1,43 @@
+---
+layout: artwork
+---
+
+
+{% assign section_art_name="AutoPortraits" %}
+{% include artwork-menu.html %}
+<div class="artwork-elements">
+    <div class="contenu miniatures-artwork">
+    <p>Étant donné mon niveau actuel, j'ai grand besoin de modèle pour dessiner. Et comme je ne souhaite vexer personne et éviter les "Euh, c'est moi, ça ?», j'ai réalisé que j'étais le sujet le plus flexible à disposition. ^^</p>
+        <div class="miniature">
+              <a href="/artwork/autoPortraitSimple.html"><img src="/images/Celia.jpg"/></a>
+        </div>
+        <div class="miniature">
+             <a href="/artwork/autoPortraitArtNouveau.html"><img src="/images/Celia art nouveau.jpg"/></a>
+        </div>
+        <div class="miniature">
+             <a href="/artwork/autoPortraitAstro.html"><img src="/images/Celia Astro.jpg"/></a>
+        </div>
+        <div class="miniature">
+             <a href="/artwork/autoPortraitChibi.html"><img src="/images/Celia Chibi.png"/></a>
+        </div>
+        <div class="miniature">
+             <a href="/artwork/autoPortraitCroft.html"><img src="/images/Celia Croft.jpg"/></a>
+        </div>
+        <div class="miniature">
+             <a href="/artwork/autoPortraitSixties.html"><img src="/images/Celia-ex-fan-de-sixties.png"/></a>
+        </div>
+        <div class="miniature">
+             <a href="/artwork/autoPortraitBitLit.html"><img src="/images/Célia héroïne de bit lit.jpg"/></a>
+        </div>
+        <div class="miniature">
+             <a href="/artwork/autoPortraitLane.html"><img src="/images/Celia Lane.png"/></a>
+        </div>
+        <div class="miniature">
+             <a href="/artwork/autoPortraitTatouageChibi.html"><img src="/images/Celia-tatouage-chibi.png"/></a>
+        </div>
+        <div class="miniature">
+             <a href="/artwork/autoPortraitSailor.html"><img src="/images/Sailor-Celia.png"/></a>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,18 @@
+---
+layout: default
+---
+
+{% include tabs.html %}
+<div class="contenu">
+    <img  class="img-texte" src="/images/Summer tome2.png" />
+    <h2>Summer Nights - Tome 2</h2>
+
+    <ul class="caracteristiques-ecrit">
+        <li><u>Type :</u> roman</li>
+        <li><u>Genre :</u> bit-lit</li>
+        <li><u>Nombre de caractères :</u> ???</li>
+    </ul>
+
+    <p>Deuxième tome de ma série sur le thème des vampires.
+J'ai déjà la trame. Il me reste à faire un petit voyage pour m’imprégner de l'ambiance de la ville où cela se déroule. On a beau dire, mais les visites par Google Street view, ça lasse !</p>
+</div>

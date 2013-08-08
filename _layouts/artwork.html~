@@ -1,0 +1,11 @@
+---
+layout: default
+---
+
+{% assign page_name="pageIllustrations" %}
+{% include tabs.html %}
+<div class="contenu">
+    <div class="artwork-elements">
+        {{content}}
+    </div>
+</div>

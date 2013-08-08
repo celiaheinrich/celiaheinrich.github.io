@@ -1,0 +1,21 @@
+---
+layout: default
+---
+
+{% assign page_name="pageEcrits" %}
+{% include tabs.html %}
+<div class="contenu">
+    <img  class="img-texte" src="/images/eclair.png" />
+    <h2>Un éclair de génie</h2>
+
+    <ul class="caracteristiques-ecrit">
+        <li><u>Type :</u> nouvelle</li>
+        <li><u>Genre :</u> steampunk</li>
+        <li><u>Nombre de caractères :</u> ~ 18000 (espaces comprises)</li>
+    </ul>
+
+    <p>Une nouvelle steampunk conçue dans le cadre d'un challenge littéraire, vingt-quatre heures pour écrire une nouvelle qui répondait à certaines contraintes.<br>
+Je me suis plutôt bien amusée à relever le défi, même si je me suis sentie un peu gênée par la limite de 18000 caractères. J'ai dû passer vite sur la fin. J'avais largement matière à noircir plus de pages !<br>
+Rodolphe est un inventeur de génie, ou presque… Il vient d'avoir une nouvelle idée à présenter au grand congrès annuel des inventeurs, l'Inventorium…</p>
+<p><a href="/pdf/Un éclair de génie.pdf">Lire la nouvelle.</a></p>
+</div>

@@ -1,0 +1,10 @@
+---
+layout: artwork
+---
+
+{% assign section_art_name="AutoPortraits" %}
+{% include artwork-menu.html %}
+<div class="contenu">
+    <p>Je suis hyper branchée Art nouveau et modernisme. J'adore les affiches de Mucha et les œuvres de Gaudí (je suis tombée en pâmoison devant la Sagrada Família). J'ai donc eu envie d'essayer de faire un portrait dans ce goût-là, sans pour autant maîtriser la finesse du trait.</p>
+    <img class="img-grand" src="/images/Celia art nouveau.jpg"/>
+</div>

@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+{% assign page_name="pageEcrits" %}
+{% include tabs.html %}
+<div class="contenu">
+    <img  class="img-texte" src="/images/Summer tome1.png" />
+    <h2>Summer Nights - Le prix à payer</h2>
+
+    <ul class="caracteristiques-ecrit">
+        <li><u>Type :</u> roman</li>
+        <li><u>Genre :</u> bit-lit</li>
+        <li><u>Nombre de caractères :</u> ~ 350000 (espaces comprises)</li>
+    </ul>
+
+    <p>Premier tome de ma série sur le thème des vampires.
+Roman écrit dans le contexte d'un tremplin d'auteurs débutants et à destination d'un public jeunes adultes (15-25 ans). Il s'agit de bit-lit (littérature de vampires).<br>
+Je suis d'une génération qui a lisait avec avidité les romans d'Anne Rice, et attendait impatiemment la trilogie du samedi pour suivre <i>Buffy contre les vampires</i>. Les murs de ma chambre étaient tapissés de posters de David Boreanaz et de James Marsters, et sur ma porte pendait fièrement l'affiche d'<i>Entretien avec un vampire</i>. Autant dire que j'ai eu beaucoup de mal avec la saga <i>Twilight</i>. Beaucoup, beaucoup…<br>
+J'ai été en revanche agréablement surprise par le film suédois sorti en 2008, <i>Morse</i>, adapté du roman <i>Laisse-moi entrer</i>, qui apporte énormément au genre. Des vampires moins romantiques, des thèmes plus sombres.<br>
+Pour construire ma mythologie, je suis évidemment partie de mes influences : Anne Rice pour la profondeur, Joss Whedon pour l'environnement, Lindqvist pour le réalisme plus noir, et j'en ai fait ma tambouille. Je me suis aussi pas mal renseignée sur des faits historiques. J'ai été étonnée par la richesse des anecdotes et faits divers ayant eu lieu aux XVIIe et XVIIIe siècles en Europe. Pas étonnant qu'Anne Rice y ait fait naître Lestat. Non plus que le terme vampire soit apparu au milieu du XVIIIe et ait inspiré les écrivains gothiques du siècle suivant.</p>
+</div>

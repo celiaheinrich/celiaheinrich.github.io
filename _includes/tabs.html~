@@ -1,0 +1,9 @@
+<p>PAGE={{ page_name }}</p>  
+<ul class="tabs">
+  <li {% if page_name == "pageIndex" %}class="selected"{% endif %}><a href="/index.html">Accueil</a></li>
+  <li {% if page_name == "pageParcours" %}class="selected"{% endif %}><a href="/parcours.html">Parcours</a></li>
+  <li {% if page_name == "pageEcrits" %}class="selected"{% endif %}><a href="/ecrits.html">Écrits</a></li>
+  <li {% if page_name == "pageIllustrations" %}class="selected"{% endif %}><a href="/artwork/illustrationsRoman.html">Illustrations</a></li>
+  <li {% if page_name == "pageApplications" %}class="selected"{% endif %}><a href="/creative_programming.html">Applications</a></li>
+  <li {% if page_name == "pageAbout" %}class="selected"{% endif %}><a href="/about.html">À mon propos</a></li>
+</ul>

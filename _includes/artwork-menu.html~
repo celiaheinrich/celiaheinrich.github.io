@@ -1,0 +1,6 @@
+<p>section_art_name={{section_art_name}}</p>
+<ul class="artwork-menu">
+    <li {% if section_art_name == "IllustrationsRoman" %}class="selected"{% endif %}><a href="/artwork/illustrationsRoman.html">Illustrations roman</a></li>
+    <li {% if section_art_name == "AutoPortraits" %}class="selected"{% endif %}><a href="/artwork/autoPortraits.html">Auto-portraits</a></li>
+    <li {% if section_art_name == "Divers" %}class="selected"{% endif %}><a href="/artwork/divers.html">Divers</a></li>
+</ul>

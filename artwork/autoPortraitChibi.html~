@@ -1,0 +1,12 @@
+---
+layout: artwork
+---
+
+{% assign section_art_name="AutoPortraits" %}
+{% include artwork-menu.html %}
+<div class="artwork-elements">
+    <div class="contenu">
+        <p>Un premier essai de version chibi, qui fait ressortir une facette de ma personnalité. J'imagine...</p>
+        <img class="img-grand" src="/images/Celia Chibi.png"/>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+---
+layout: artwork
+---
+
+{% assign section_art_name="Divers" %}
+{% include artwork-menu.html %}
+<div class="artwork-elements">
+    <div class="contenu">
+        <p>Illustration réalisée pour un profil twitter et github.</p>
+        <img class="img-grand" src="/images/Stephane-profil.png"/>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+---
+layout: artwork
+---
+
+{% assign section_art_name="AutoPortraits" %}
+{% include artwork-menu.html %}
+<div class="artwork-elements">
+    <div class="contenu">
+        <p>Lara Croft, une femme forte du jeux vidéo. J'aime bien cette image un peu paradoxale du personnage à la fois féministe et hyper-sexuée pour coller au canon du genre. Au cours des années, elle a quand même un peu perdu de sa plastique surréaliste. Peut-être que c'est elle qui cherche à me ressemble finalement. Courage Lara, encore trois ou quatre bonnets et on y arrive !</p>
+        <img class="img-grand" src="/images/Celia Croft.jpg"/>
+    </div>
+</div>

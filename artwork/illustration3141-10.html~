@@ -1,0 +1,10 @@
+---
+layout: artwork
+---
+
+{% assign section_art_name="IllustrationsRoman" %}
+{% include artwork-menu.html %}
+<div class="contenu">
+    <p>Illustration du dixième chapitre de <i>3141 kilomètres</i>. Un indice pour vous à la maison : ça se passe sous une tente.</p>
+    <img class="img-grand" src="/images/Num 10.jpg"/>
+</div>

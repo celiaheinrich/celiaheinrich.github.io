@@ -1,0 +1,11 @@
+---
+layout: default
+---
+
+{% assign page_name="pageEcrits" %}
+{% include tabs.html %}
+<div class="contenu">
+    <h2>Formation</h2>
+    <p class="citation"><i>Socrate, la veille de sa mort, était en train d'apprendre un air de flûte. «A quoi cela te servira-t-il? lui dit-on. - A savoir cet air avant de mourir.»</i> 1966, Émile Cioran.</p>
+    <p>bla bla bla</p>
+</div>

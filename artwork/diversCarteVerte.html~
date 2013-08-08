@@ -1,0 +1,10 @@
+---
+layout: artwork
+---
+
+{% assign section_art_name="Divers" %}
+{% include artwork-menu.html %}
+<div class="contenu">
+    <p>Illustration pour une carte postale.</p>
+    <img class="img-grand" src="/images/carte verte.jpg"/>
+</div>

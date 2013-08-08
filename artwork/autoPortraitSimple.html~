@@ -1,0 +1,10 @@
+---
+layout: artwork
+---
+
+{% assign section_art_name="AutoPortraits" %}
+{% include artwork-menu.html %}
+<div class="contenu">
+    <p>Je suis partie d'une photo que j'aimais bien. Et j'ai exagéré mes traits, notamment la taille des yeux pour un effet cartoon.</p>
+    <img class="img-grand" src="/images/Celia.jpg"/>
+</div>
