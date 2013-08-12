@@ -351,11 +351,29 @@ html, body {
 
 }
 
+#content .contact{
+  text-align: center;
+  font-weight: bold;
+  text-decoration: none;
+
+}
+
+#content .contact a{
+  text-decoration: none;
+  color: inherit;
+
+}
+
 .img-header{
   position: absolute;
   top: 15px;
   right: 25px;
   float: right;
   width: 180px;
+}
+
+#footer  a{
+  text-decoration: none;
+  color: inherit;
 
 }
