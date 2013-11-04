@@ -6,6 +6,7 @@ html, body {
 
 #header {
   background: #323232;
+  position: relative;
 }
 #header h1 {
   margin: 0;
@@ -23,7 +24,6 @@ html, body {
   font-size: 40px;
   color: grey;
 }
-
 
 #content {
   min-height: 700px;
@@ -80,11 +80,29 @@ html, body {
   position: fixed;
   bottom: 0;
   background: #666;
+  font-family: 'Text Me One', cursive;
+  font-size: 16px;
   text-align: center;
   color: #e2ddd7;
   padding: 5px 0;
   width: 100%;
 }
+#footer ul {
+  list-style: none;
+  position: absolute;
+  bottom: 0px;
+  right: 0;
+  margin: 0px;
+  padding: 0;
+}
+#footer ul li {
+  float: left;
+  margin: 5px 5px 0 5px;
+}
+#footer ul li img {
+  max-height: 20px;
+}
+
 
 #content .ecrits {
   width: 945px;
@@ -376,4 +394,21 @@ html, body {
   text-decoration: none;
   color: inherit;
 
+}
+
+#content {
+    text-align: center;
+}
+
+#content .img-monster {
+  float: right;
+  margin: 0 0 0 0;
+  max-width: 300px;
+  max-height: 300px;
+
+}
+
+canvas {
+    margin-top : 20px;
+    display: inline;
 }
