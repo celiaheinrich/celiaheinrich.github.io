@@ -11,7 +11,32 @@ layout: default-en
     <br>
     The gameplay is basic and doesn't reflect the intended game's. Only the universe was kept. You must help the little monster gather all the components to repair itself.
     </p>
-    <a href="/src/demo-en.html">Try out the tech demo.</a>
+    <a href="/src/demo-en.html" id="gameLink">Try out the tech demo.</a>
     
     <img class="img-grand" src="/images/Monstre1.png" />
 </div>
+
+<script>
+var isPhone = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i) ? true : false;
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i) ? true : false;
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i) ? true : false;
+    },
+    any: function() {
+        return (isPhone.Android() || isPhone.BlackBerry() || isPhone.iOS() || isPhone.Windows());
+    }
+};
+
+if (isPhone.any()) {
+    document.getElementById("gameLink").setAttribute("href", "/src/phone.html")
+}
+
+</script>

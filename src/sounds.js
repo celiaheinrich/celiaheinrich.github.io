@@ -8,33 +8,41 @@ window.addEventListener('click', HandleClick, false);
 var isMute = false;
 
 function drawSound(ctx) {
-    if (isMute)
-    {
-        ctx.drawImage(soundOff, 750, 758, 50, 42);
-    }
-    else
-    {
-         ctx.drawImage(soundOn, 750, 758, 50, 42);
+    if(!isTouchScreen) {
+        if (isMute)
+        {
+            ctx.drawImage(soundOff, sizeConfig.sounds.offsetX, sizeConfig.sounds.offsetY, sizeConfig.sounds.width, sizeConfig.sounds.height);
+        }
+        else
+        {
+             ctx.drawImage(soundOn, sizeConfig.sounds.offsetX, sizeConfig.sounds.offsetY, sizeConfig.sounds.width, sizeConfig.sounds.height);
+        }
     }
 }
 
 function HandleClick(evt){
-	//alert(evt.keyCode);
+	if (isIntroPlayed) {
+	    var offX = sizeConfig.sounds.offsetX;
+	    var offY = sizeConfig.sounds.offsetY;
+	    var canvasWidth = sizeConfig.canvasWidth;
 	
-	var x = evt.pageX - canvas.offsetLeft;
-    var y = evt.pageY - canvas.offsetTop;
-	if(x >=750 && x <= 800 && y >= 758 && y <= 800) {
-	    var soundValue = (isMute ? 1:0);
+	    var x = evt.pageX - canvas.offsetLeft;
+        var y = evt.pageY - canvas.offsetTop;
+	    if(x >=offX && x <= canvasWidth && y >= offY && y <= canvasWidth) {
+	        pauseOrRestartsound();
+	    }
+	}
+}
+
+function pauseOrRestartsound() {
+var soundValue = (isMute ? 1:0);
         isMute = !isMute;
-        /*var son = document.getElementById("FXObj");
-        son.volume = soundValue;*/
         var son = document.getElementById("FXScratch");
         son.volume = soundValue;
         var son2 = document.getElementById("DialCombo");
         son2.volume = soundValue;
         var son3 = document.getElementById("DialHurt");
         son3.volume = soundValue;
-	}
 }
 
 

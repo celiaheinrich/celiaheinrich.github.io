@@ -14,19 +14,59 @@ var Keys = {
     RIGHT: 39
 }
 
-var X_SPLIT = 250;
-var Y_SPLIT = 248;
-var Y_CANVAS = 504;
-var WIDTH_CANVAS = 250;
-var HEIGHT_CANVAS = 250;
 
-var BOTTOM_LINE = 758;
 
 var vie = new Image();
 var viePedue = new Image();
 vie.src = '../img/vie.png';
 viePedue.src = '../img/vie-perdue.png';
-var SPEED_PAWS = 50;
+
+function fisOnPaw(x, y) {
+    //est sur la papatte
+    if(papatte.isActive()) {
+        var widthPaw = sizeConfig.paws.width;
+        var heightPaw = sizeConfig.paws.height;
+        var marginHeight = sizeConfig.heightUpMargin;
+        var GameZoneHeight = sizeConfig.heightGameZone;
+        var upPaw = GameZoneHeight + marginHeight - heightPaw;
+        if (x >= papatte.posX && x <= (papatte.posX + widthPaw) && y >= upPaw && y <= (upPaw + heightPaw))
+            isOnPaw = true;
+        else
+            isOnPaw = false;
+    }
+}
+
+/*function isStillOnPaw (x, y) {
+    //On évalue pas x
+    if(papatte.isActive()) {
+        var widthPaw = sizeConfig.paws.width;
+        var heightPaw = sizeConfig.paws.height;
+        var marginHeight = sizeConfig.heightUpMargin;
+        var GameZoneHeight = sizeConfig.heightGameZone;
+        var upPaw = GameZoneHeight + marginHeight - heightPaw;
+        if (y >= upPaw && y <= (upPaw + heightPaw))
+            isOnPaw = true;
+        else
+            isOnPaw = false;
+    }
+}*/
+
+
+
+function handleMove (evt) {
+    
+    evt.preventDefault();
+    var touches = evt.changedTouches;
+    var x = touches[0].pageX - canvas.offsetLeft;
+    var y = touches[0].pageY - canvas.offsetTop;
+    //isStillOnPaw (x, y)
+    if(isOnPaw)
+        touchPosXPaw =x
+    else
+        touchPosXPaw = -1;
+}
+
+
 
 
 function handleKeyDown(evt, papatte){
@@ -52,7 +92,7 @@ function handleKeyUp(evt, papatte) {
 var Papatte = function(spriteSheet) {
      this.spriteSheet = spriteSheet;
      this.lifes = 3;
-     this.posX = 325;
+     this.posX = (sizeConfig.canvasWidth - sizeConfig.paws.width)/2;
      this.state = States.STILL;
      this.isWell = true;
      this.hurtCount = 0;
@@ -74,6 +114,35 @@ Papatte.prototype.isImmune = function() {
 
 
 Papatte.prototype.draw = function(ctx) {
+
+    if(isTouchScreen && papatte.isActive()) {
+        var xComp = touchPosXPaw;
+        var widthPaw = sizeConfig.paws.width;
+        if(!isOnPaw)
+             papatte.state = States.STILL;
+        else if ((papatte.posX + widthPaw/4)  > xComp)
+                papatte.state = States.LOW_LEFT;
+            else if ((papatte.posX + 3*widthPaw/4) < xComp)
+                papatte.state = States.LOW_RIGHT;
+            else
+             papatte.state = States.STILL;
+    }
+
+
+    var marginHeight = sizeConfig.heightUpMargin;
+    var GameZoneHeight = sizeConfig.heightGameZone;
+    var canvasWidth = sizeConfig.canvasWidth;
+
+    var X_SPLIT = 250;
+    var Y_SPLIT = 248;
+    
+    var SPEED_PAWS = sizeConfig.paws.speed;
+    var WIDTH_CANVAS = sizeConfig.paws.width;
+    var HEIGHT_CANVAS = sizeConfig.paws.height;
+    var Y_CANVAS = GameZoneHeight + marginHeight - HEIGHT_CANVAS;
+    var leftBound = sizeConfig.paws.leftBound;
+    var rightBound = sizeConfig.paws.rightBound;
+
     var ySprite = 1;
     if (this.lifes <= 1)
         ySprite = Y_SPLIT*2+5; 
@@ -93,8 +162,8 @@ Papatte.prototype.draw = function(ctx) {
         if(this.isAlive())
             this.posX-=SPEED_PAWS;
         this.state = States.HEAVY_LEFT;
-        if (this.posX < -10)
-            this.posX = -10;
+        if (this.posX < leftBound)
+            this.posX = leftBound;
         if (this.immuneCount > 0) {
             this.immuneCount = this.immuneCount-1;
         }
@@ -104,8 +173,8 @@ Papatte.prototype.draw = function(ctx) {
             ctx.drawImage(this.spriteSheet, X_SPLIT * 2, ySprite, X_SPLIT, Y_SPLIT, this.posX, Y_CANVAS, WIDTH_CANVAS, HEIGHT_CANVAS);
         if(this.isAlive())
             this.posX-=SPEED_PAWS;
-        if (this.posX < -10)
-            this.posX = -10;
+        if (this.posX < leftBound)
+            this.posX = leftBound;
         if (this.immuneCount > 0) {
             this.immuneCount = this.immuneCount-1;
         }
@@ -116,8 +185,8 @@ Papatte.prototype.draw = function(ctx) {
         if(this.isAlive())
             this.posX+=SPEED_PAWS;
         this.state = States.HEAVY_RIGHT;
-        if (this.posX > 570)
-            this.posX = 570;
+        if (this.posX > rightBound)
+            this.posX = rightBound;
         if (this.immuneCount > 0) {
             this.immuneCount = this.immuneCount-1;
         }
@@ -127,15 +196,15 @@ Papatte.prototype.draw = function(ctx) {
             ctx.drawImage(this.spriteSheet, X_SPLIT * 4, ySprite, X_SPLIT, Y_SPLIT, this.posX, Y_CANVAS, WIDTH_CANVAS, HEIGHT_CANVAS);
         if(this.isAlive())
             this.posX+=SPEED_PAWS;
-        if (this.posX > 570)
-            this.posX = 570;
+        if (this.posX > rightBound)
+            this.posX = rightBound;
         if (this.immuneCount > 0) {
             this.immuneCount = this.immuneCount-1;
         }
         break;
         case States.HURT_BEG:
         ctx.fillStyle = "rgba(255,0,0,0.3)";
-        ctx.fillRect(0, 46, 800, 708);
+        ctx.fillRect(0, marginHeight, canvasWidth, GameZoneHeight);
         if(this.hurtCount % 2 == 0)
             ctx.drawImage(this.spriteSheet, X_SPLIT, Y_SPLIT*3+7, X_SPLIT, Y_SPLIT, this.posX, Y_CANVAS, WIDTH_CANVAS, HEIGHT_CANVAS);
         this.hurtCount = this.hurtCount+1;
@@ -146,7 +215,7 @@ Papatte.prototype.draw = function(ctx) {
         break;
         case States.HURT_MID:
         ctx.fillStyle = "rgba(255,0,0,0.3)";
-        ctx.fillRect(0, 46, 800, 708);
+        ctx.fillRect(0, marginHeight, canvasWidth, GameZoneHeight);
         if(this.hurtCount % 2 == 0)
             ctx.drawImage(this.spriteSheet, X_SPLIT, Y_SPLIT*4+9, X_SPLIT, Y_SPLIT, this.posX, Y_CANVAS, WIDTH_CANVAS, HEIGHT_CANVAS);
         this.hurtCount = this.hurtCount+1;
@@ -157,7 +226,7 @@ Papatte.prototype.draw = function(ctx) {
         break;
         case States.HURT_END:
         ctx.fillStyle = "rgba(255,0,0,0.3)";
-        ctx.fillRect(0, 46, 800, 708);
+        ctx.fillRect(0, marginHeight, canvasWidth, GameZoneHeight);
         if(this.hurtCount % 2 == 0)
             ctx.drawImage(this.spriteSheet, X_SPLIT, Y_SPLIT*5+11, X_SPLIT, Y_SPLIT, this.posX, Y_CANVAS, WIDTH_CANVAS, HEIGHT_CANVAS);
         this.hurtCount = this.hurtCount+1;
@@ -174,33 +243,41 @@ Papatte.prototype.draw = function(ctx) {
 
 
 Papatte.prototype.drawLife = function(ctx) {
+    var BOTTOM_LINE = sizeConfig.heightGameZone + sizeConfig.heightUpMargin;
+    var imgWidth = sizeConfig.lives.width;
+    var imgHeight = sizeConfig.lives.height;
+    var x1 = sizeConfig.lives.offsetX;
+    var x2 = x1 + imgWidth;
+    var x3 = x2 + imgWidth;
+    
    switch (this.lifes) {
     case 3:
-    ctx.drawImage(vie, 5, BOTTOM_LINE, 50, 42);
-    ctx.drawImage(vie, 55, BOTTOM_LINE, 50, 42);
-    ctx.drawImage(vie, 105, BOTTOM_LINE, 50, 42);
+    ctx.drawImage(vie, x1, BOTTOM_LINE, imgWidth, imgHeight);
+    ctx.drawImage(vie, x2, BOTTOM_LINE, imgWidth, imgHeight);
+    ctx.drawImage(vie, x3, BOTTOM_LINE, imgWidth, imgHeight);
     break;
     case 2:
-    ctx.drawImage(vie, 5, BOTTOM_LINE, 50, 42);
-    ctx.drawImage(vie, 55, BOTTOM_LINE, 50, 42);
-    ctx.drawImage(viePedue, 105, BOTTOM_LINE, 50, 42);
+    ctx.drawImage(vie, x1, BOTTOM_LINE, imgWidth, imgHeight);
+    ctx.drawImage(vie, x2, BOTTOM_LINE, imgWidth, imgHeight);
+    ctx.drawImage(viePedue, x3, BOTTOM_LINE, imgWidth, imgHeight);
     break;
     case 1:
-    ctx.drawImage(vie, 5, BOTTOM_LINE, 50, 42);
-    ctx.drawImage(viePedue, 55, BOTTOM_LINE, 50, 42);
-    ctx.drawImage(viePedue, 105, BOTTOM_LINE, 50, 42);
+    ctx.drawImage(vie, x1, BOTTOM_LINE, imgWidth, imgHeight);
+    ctx.drawImage(viePedue, x2, BOTTOM_LINE, imgWidth, imgHeight);
+    ctx.drawImage(viePedue, x3, BOTTOM_LINE, imgWidth, imgHeight);
     break;
     default:
-    ctx.drawImage(viePedue, 5, BOTTOM_LINE, 50, 42);
-    ctx.drawImage(viePedue, 55, BOTTOM_LINE, 50, 42);
-    ctx.drawImage(viePedue, 105, BOTTOM_LINE, 50, 42);
+    ctx.drawImage(viePedue, x1, BOTTOM_LINE, imgWidth, imgHeight);
+    ctx.drawImage(viePedue, x2, BOTTOM_LINE, imgWidth, imgHeight);
+    ctx.drawImage(viePedue, x3, BOTTOM_LINE, imgWidth, imgHeight);
     break;
     }
     
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = '30px Love Ya Like A Sister, cursive';
+    ctx.font = sizeConfig.lives.directionFontSize +' Love Ya Like A Sister, cursive';
     ctx.textAlign = 'right';
-    ctx.fillText ("Use ← and → to move the paws", 620, BOTTOM_LINE+28);
+    if (!isTouchScreen)
+        ctx.fillText ("Use ← and → to move the paws", sizeConfig.lives.directionOffsetX, BOTTOM_LINE+sizeConfig.lives.directionShiftY);
     drawSound(ctx);
 
 }

@@ -30,20 +30,75 @@ var papatte;
 var canvas;
 
 function initialiser () {
+    createCanvas();
     background.src = '../img/Usine main acc.jpg';
     coton.src = '../img/coton.png';
     pelote.src = '../img/pelote.png'
     polystyrene.src = '../img/poly.png'
     punaise.src = '../img/punaises.png'
     spriteSheet.src = '../img/papattes-sprite.png';
-    window.addEventListener('keydown', makeHandleKeyDown, false);
-    window.addEventListener('keyup', makehandleKeyUp, false);
+    
+        
     papatte = new Papatte(spriteSheet);
     canvas = document.getElementById("gameCanvas");
     ctx = canvas.getContext('2d');
     playIntro (ctx);
     
+    window.addEventListener('keydown', makeHandleKeyDown, false);
+    window.addEventListener('keyup', makehandleKeyUp, false);
+    
+    
+        //pour le touchScreen
+    canvas.addEventListener("touchstart", handleStart, false);
+    canvas.addEventListener("touchend", handleEnd, false);
+    canvas.addEventListener("touchleave", handleEnd, false);
+    canvas.addEventListener("touchmove", handleMove, false);
+    
 }
+
+function handleStart (evt) {
+    evt.preventDefault();
+    //au cas où
+    isTouchScreen = true;
+    var touches = evt.changedTouches;
+    touchPosXPaw = touches[0].pageX - canvas.offsetLeft;
+    var x = touches[0].pageX - canvas.offsetLeft;
+    var y = touches[0].pageY - canvas.offsetTop;
+    
+    //Lancement du jeu
+    if (!isIntroPlayed) {
+        showInstructions(ctx, background, papatte);
+        isIntroPlayed = true;
+        if (firstTime) {
+            firstTime = false;
+            var son = document.getElementById("DialNeutral");
+            son.play();
+        }
+    }
+    
+    //est sur la papatte
+    fisOnPaw(x, y)
+    
+    //son
+    if (!isTouchScreen && isIntroPlayed) {
+        var offX = sizeConfig.sounds.offsetX;
+	    var offY = sizeConfig.sounds.offsetY;
+	    var canvasWidth = sizeConfig.canvasWidth;
+	    if(x >=offX && x <= canvasWidth && y >= offY && y <= canvasWidth) {
+	        pauseOrRestartsound();
+	    }
+    }
+}
+
+function handleEnd (evt) {
+    evt.preventDefault();
+    touchPosXPaw = -1;
+    isOnPaw = false;
+    if (papatte.isActive())
+        papatte.state = States.STILL;
+}
+
+
 
 function handleKeyUpWhileIntro (evt) {
     switch (evt.keyCode) {
@@ -60,7 +115,7 @@ function handleKeyUpWhileIntro (evt) {
 }
 
 function startGame () {
-    drawInterval = setInterval(function () {drawElements (ctx);},80);
+    drawInterval = setInterval(function () {drawElements (ctx);}, 80);
     createObjInterval = setInterval(createFallenObjects, 800);
     createTackInterval = setInterval(createTacks, 800);
 }
@@ -91,13 +146,16 @@ function createTacks() {
 }
 
 function drawElements (ctx){
+    var marginHeight = sizeConfig.heightUpMargin;
+    var GameZoneHeight = sizeConfig.heightGameZone;
+    var canvasWidth = sizeConfig.canvasWidth;
 
     var listSuppression = [];
     
     var listTackSuppression = [];
     
-    ctx.clearRect(0,0, 800, 800);
-    ctx.drawImage(background,0,46,800, 708);
+    ctx.clearRect(0,0, canvasWidth, canvasWidth);
+    ctx.drawImage(background,0,marginHeight,canvasWidth, GameZoneHeight);
     papatte.draw(ctx);
     if(papatte.isActive()){
         calculateScore(papatte, listFallenObject, listSuppression);
@@ -122,8 +180,8 @@ function drawElements (ctx){
     }
     
     ctx.fillStyle = '#323232';
-    ctx.fillRect(0, 754, 800, 46);
-    ctx.fillRect(0, 0, 800, 46);
+    ctx.fillRect(0, marginHeight + GameZoneHeight, canvasWidth, marginHeight);
+    ctx.fillRect(0, 0, canvasWidth, marginHeight);
     papatte.drawLife(ctx);
     drawScore (ctx);
     if (papatte.lifes == 0 && !isgameStopped) {

@@ -3,18 +3,20 @@ var Tack = function(latestXPos) {
 //Tirages aléatoires
 
 this.posX = calculateXPos (latestXPos); 
-this.speed = Math.floor((Math.random()*60)+21); 
-this.posY = 46;
+this.speed = Math.floor((Math.random()*sizeConfig.tack.speedMulti) + sizeConfig.tack.speedConst); 
+this.posY = sizeConfig.heightUpMargin;
 }
 
 
 
 function calculateTackXPos (latestTackXPos) {
-    var x = Math.floor((Math.random()*700)+1);
+    var widthObj = sizeConfig.tack.width;
+    var zone = sizeConfig.canvasWidth - widthObj;
+    var x = Math.floor((Math.random()*zone)+1);
     for (var j = 0; j < latestXPos.length; j++) {
-        if (((x>= latestXPos[j]) && (x <= (latestXPos[j] +100))) || ((latestXPos[j]>= x) && (latestXPos[j] <= (x +100)))) {
-            x = x +100;
-            if (x > 700)
+        if (((x>= latestXPos[j]) && (x <= (latestXPos[j] +widthObj))) || ((latestXPos[j]>= x) && (latestXPos[j] <= (x +widthObj)))) {
+            x = x +widthObj;
+            if (x > zone)
                 x = 0;
         }
     }
@@ -54,11 +56,14 @@ function manageTacks(listTack, latestTackXPos, ixlatestTackXPos) {
 }
 
 function drawTacks(ctx, listTack, listTackSuppression) {
+    var widthObj = sizeConfig.tack.width;
+    var heightObj = sizeConfig.tack.height;
+    var bottomLine = sizeConfig.heightGameZone + sizeConfig.heightUpMargin;
     for (var u = 0; u < listTack.length; u++) {
                     var tack = listTack[u];
-                    ctx.drawImage(punaise,tack.posX,tack.posY, 100, 100);
+                    ctx.drawImage(punaise,tack.posX,tack.posY, widthObj, heightObj);
                         tack.posY = tack.posY + tack.speed;
-                        if (tack.posY > 654) {
+                        if (tack.posY > (bottomLine - heightObj)) {
                             listTackSuppression.push(u);
                         }
                 }

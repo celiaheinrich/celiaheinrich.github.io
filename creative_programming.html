@@ -10,7 +10,33 @@ layout: default
     <br>
     Le gameplay est très sommaire et ne reprend pas celui du jeu cible. Seul l'univers a été gardé. Il faut aider notre petit monstre à récupérer des matières premières pour se réparer.
     </p>
-    <a href="/src/demo.html">Essayer la démo technique.</a>
+    
+    <a href="/src/demo.html" id="gameLink">Essayer la démo technique.</a>
     
     <img class="img-grand" src="/images/Monstre1.png" />
 </div>
+
+<script>
+var isPhone = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i) ? true : false;
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i) ? true : false;
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i) ? true : false;
+    },
+    any: function() {
+        return (isPhone.Android() || isPhone.BlackBerry() || isPhone.iOS() || isPhone.Windows());
+    }
+};
+
+if (isPhone.any()) {
+    document.getElementById("gameLink").setAttribute("href", "/src/phone.html")
+}
+
+</script>

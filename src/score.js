@@ -36,30 +36,32 @@ var multiplier = Multipliers.NONE;
 
 
 function drawScore (ctx) {
-    ctx.drawImage(bobine, 5, 2, 45, 45);
+    var dimSpool = sizeConfig.scoreBanner.spool;
+    var dimMulti = sizeConfig.scoreBanner.multiplier;
+    ctx.drawImage(bobine, dimSpool.offsetX, dimSpool.offsetY, dimSpool.width, dimSpool.height);
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = '30px Love Ya Like A Sister, cursive';
+    ctx.font = sizeConfig.scoreBanner.fontSize + ' Love Ya Like A Sister, cursive';
     ctx.textAlign = 'right';
-    ctx.fillText (score, 170, 30);
+    ctx.fillText (score, sizeConfig.scoreBanner.score.offsetX, sizeConfig.scoreBanner.score.offsetY);
     ctx.textAlign = 'left';
     ctx.fillStyle = '#5E52BB';
-    ctx.fillText ('Combo: ' +combo, 650, 30);
+    ctx.fillText ('Combo: ' +combo, sizeConfig.scoreBanner.combo.offsetX, sizeConfig.scoreBanner.combo.offsetY);
     switch (multiplier)
     {
         case Multipliers.DOUBLE:
-        ctx.drawImage(bronze, 500, 0, 63, 48);
+        ctx.drawImage(bronze, dimMulti.offsetX, dimMulti.offsetY, dimMulti.width, dimMulti.height);
         ctx.fillStyle = '#9A451E';
-        ctx.fillText ('x2', 570, 30);
+        ctx.fillText ('x2', dimMulti.textOffsetX, dimMulti.textOffsetY);
         break;
         case Multipliers.TRIPLE:
-        ctx.drawImage(silver, 500, 2, 63, 48);
+        ctx.drawImage(silver, dimMulti.offsetX, dimMulti.offsetY, dimMulti.width, dimMulti.height);
         ctx.fillStyle = '#958983';
-        ctx.fillText ('x3', 570, 30);
+        ctx.fillText ('x3', dimMulti.textOffsetX, dimMulti.textOffsetY);
         break;
         case Multipliers.QUINTUPLE:
-        ctx.drawImage(gold, 500, 2, 63, 48);
+        ctx.drawImage(gold, dimMulti.offsetX, dimMulti.offsetY, dimMulti.width, dimMulti.height);
         ctx.fillStyle = '#D19D30';
-        ctx.fillText ('x5', 570, 30);
+        ctx.fillText ('x5', dimMulti.textOffsetX, dimMulti.textOffsetY);
         break;
     }
 }
@@ -78,6 +80,9 @@ function incrCombo (){
 }
 
 function calculateScore(papatte, listFallenObject, listSuppression) {
+    var yPaw = sizeConfig.heightGameZone + sizeConfig.heightUpMargin - sizeConfig.paws.height;
+    var widthPaw = sizeConfig.paws.width;
+    var halfWidthFallenObjects = sizeConfig.fallenObjects.width/2;
     if (combo >= 10)
         multiplier = Multipliers.DOUBLE;
     if (combo >= 20)
@@ -86,8 +91,8 @@ function calculateScore(papatte, listFallenObject, listSuppression) {
         multiplier = Multipliers.QUINTUPLE;
     for (var j = 0; j < listFallenObject.length; j++) {
          var obj = listFallenObject[j];
-         if (obj.posY >= 504) {
-            if ((( (obj.posX +50) >= papatte.posX) && ((obj.posX +50) <= (papatte.posX+250)))) {
+         if (obj.posY >= yPaw) {
+            if ((( (obj.posX +halfWidthFallenObjects) >= papatte.posX) && ((obj.posX +halfWidthFallenObjects) <= (papatte.posX+widthPaw)))) {
                 switch (obj.type)
                     {
                         case Types.COTON:
@@ -115,12 +120,14 @@ function calculateScore(papatte, listFallenObject, listSuppression) {
 }
 
 function calculateLife(papatte, listTack, listTackSuppression, ctx) {
+    var yPaw = sizeConfig.heightGameZone + sizeConfig.heightUpMargin - sizeConfig.paws.height;
+    var widthPaw = sizeConfig.paws.width;
     if (!papatte.isImmune()){
         var lostlife = false;
         for (var j = 0; j < listTack.length; j++) {
              var obj = listTack[j];
-             if (obj.posY >= 504) {
-                if ((( (obj.posX +50) >= papatte.posX) && ((obj.posX +50) <= (papatte.posX+250)))) {
+             if (obj.posY >= yPaw) {
+                if ((( (obj.posX +50) >= papatte.posX) && ((obj.posX +50) <= (papatte.posX+widthPaw)))) {
                     lostlife = true;
                     resetCombo();
                     listTackSuppression.push(j);
@@ -134,7 +141,7 @@ function calculateLife(papatte, listTack, listTackSuppression, ctx) {
             papatte.isWell = false;
             papatte.state = States.HURT_BEG;
             setTimeout(function () {var son2 = document.getElementById("DialHurt");
-            son2.play();}, 300);
+            var qqch = son2.play(); console.log(son2); console.log(qqch);}, 300);
             
 
         }
@@ -152,76 +159,87 @@ function drawGameOver(ctx, drawInterval, createObjInterval, createTackInterval, 
     clearInterval(createObjInterval);
     clearInterval(createTackInterval);
     ctx.fillStyle = "rgba(0,0,0,0.4)";
-    ctx.fillRect(0, 0, 800, 800);
-    ctx.font = '70px Love Ya Like A Sister, cursive';
+    ctx.fillRect(0, 0, sizeConfig.canvasWidth, sizeConfig.canvasWidth);
+    ctx.font = sizeConfig.gameOver.txtGameOverSize + ' Love Ya Like A Sister, cursive';
     ctx.textAlign = 'left';
     ctx.fillStyle = '#FFFFFF';
     var msg = 'Game Over';
     var textSize = ctx.measureText (msg);
-    var xCoord = 400 - (textSize.width / 2);
-    ctx.fillText (msg, xCoord, 450);
-    ctx.font = '50px Love Ya Like A Sister, cursive';
+    var xCoord = (sizeConfig.canvasWidth - textSize.width) / 2;
+    ctx.fillText (msg, xCoord, sizeConfig.gameOver.txtGameOverY);
+    ctx.font = sizeConfig.gameOver.txtRestartSize + ' Love Ya Like A Sister, cursive';
     var msgBis = "Press 'Enter' to play again.";
     textSize = ctx.measureText (msgBis);
-    xCoord = 400 - (textSize.width / 2);
-    ctx.fillText (msgBis, xCoord, 550);
+    xCoord = (sizeConfig.canvasWidth - textSize.width) / 2;
+    ctx.fillText (msgBis, xCoord, sizeConfig.gameOver.txtRestartY);
     isIntroPlayed = false;
     drawProgressiveTitle (ctx, 0, background);
 
 }
 
 function completeRedraw(ctx, background) {
-    ctx.clearRect(0,0, 800, 800);
-    ctx.drawImage(background,0,46,800, 708);
+    var marginHeight = sizeConfig.heightUpMargin;
+    var GameZoneHeight = sizeConfig.heightGameZone;
+    var canvasWidth = sizeConfig.canvasWidth;
+    ctx.clearRect(0,0, canvasWidth, canvasWidth);
+    ctx.drawImage(background,0, marginHeight, canvasWidth, GameZoneHeight);
     papatte.draw(ctx);
     ctx.fillStyle = '#323232';
-    ctx.fillRect(0, 754, 800, 46);
-    ctx.fillRect(0, 0, 800, 46);
+    ctx.fillRect(0, GameZoneHeight+marginHeight, canvasWidth, marginHeight);
+    ctx.fillRect(0, 0, canvasWidth, marginHeight);
     papatte.drawLife(ctx);
     drawScore (ctx);
     ctx.fillStyle = "rgba(0,0,0,0.4)";
-    ctx.fillRect(0, 0, 800, 800);
-    ctx.font = '70px Love Ya Like A Sister, cursive';
+    ctx.fillRect(0, 0, sizeConfig.canvasWidth, sizeConfig.canvasWidth);
+    ctx.font = sizeConfig.gameOver.txtGameOverSize + ' Love Ya Like A Sister, cursive';
     ctx.textAlign = 'left';
     ctx.fillStyle = '#FFFFFF';
     var msg = 'Game Over';
     var textSize = ctx.measureText (msg);
-    var xCoord = 400 - (textSize.width / 2);
-    ctx.fillText (msg, xCoord, 450);
-    ctx.font = '50px Love Ya Like A Sister, cursive';
+    var xCoord = (sizeConfig.canvasWidth - textSize.width) / 2;
+    ctx.fillText (msg, xCoord, sizeConfig.gameOver.txtGameOverY);
+    ctx.font = sizeConfig.gameOver.txtRestartSize + ' Love Ya Like A Sister, cursive';
     var msgBis = "Press 'Enter' to play again.";
+    if (isTouchScreen)
+        msgBis = "Touch screen to play again.";
     textSize = ctx.measureText (msgBis);
-    xCoord = 400 - (textSize.width / 2);
-    ctx.fillText (msgBis, xCoord, 550);
+    xCoord = (sizeConfig.canvasWidth - textSize.width) / 2;
+    ctx.fillText (msgBis, xCoord, sizeConfig.gameOver.txtRestartY);
 }
 
 function drawProgressiveTitle (ctx, counter, background) {
     if (!isIntroPlayed) {
         if (counter <= 1){
+            //Conf coord
+            var xAch = sizeConfig.achievement.offsetX;
+            var yAch =  sizeConfig.achievement.offsetY;
+            var widthAch = sizeConfig.achievement.width;
+            var heightAch = sizeConfig.achievement.height;
+            var fontSizeScore = sizeConfig.achievement.fontSizeScore;
+            var yTextAch = sizeConfig.achievement.offsetYText;
+        
             completeRedraw(ctx, background);
              ctx.save();
-             ctx.font = '20px Love Ya Like A Sister, cursive';
+             ctx.font = fontSizeScore+' Love Ya Like A Sister, cursive';
              ctx.fillStyle = "rgb(255,255,255)";
             ctx.globalAlpha = counter;
             var msg ="Final score: "+score;
             if (score < 1000)
-                ctx.drawImage(heavy, 80, 30, 600, 300);
+                ctx.drawImage(heavy, xAch, yAch, widthAch, heightAch);
             else if (score < 2500) {
                 ctx.fillStyle = '#4C1B1B';
-                ctx.drawImage(sewIt, 80, 30, 600, 300);
+                ctx.drawImage(sewIt,xAch, yAch, widthAch, heightAch);
                 }
-                //msg = "Week-end Ms Sew-It";
             else if (score < 4000)
-                ctx.drawImage(cottonJoe, 80, 30, 600, 300);
-                //msg = "Cotton-handed Joe";
+                ctx.drawImage(cottonJoe, xAch, yAch, widthAch, heightAch);
+
             else {
-                ctx.drawImage(serialKnitter, 80, 30, 600, 300);
+                ctx.drawImage(serialKnitter, xAch, yAch, widthAch, heightAch);
                 ctx.fillStyle = '#40411E';
             }
-                //msg = "Serial knitter";
             var textSize = ctx.measureText (msg);
-            var xCoord = 400 - (textSize.width / 2);
-            ctx.fillText (msg, xCoord, 268);
+            var xCoord = (sizeConfig.canvasWidth/2) - (textSize.width / 2);
+            ctx.fillText (msg, xCoord, yTextAch);
             setTimeout(function () {drawProgressiveTitle (ctx, counter+0.05, background);},100);
             ctx.restore();
             

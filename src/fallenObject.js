@@ -8,17 +8,19 @@ var FallenObject = function(latestXPos) {
 //Tirages aléatoires
 
 this.posX = calculateXPos (latestXPos);  
-this.posY = 46;
+this.posY = sizeConfig.heightUpMargin;
 this.type = Math.floor((Math.random()*3)+1); 
-this.speed = this.type *15 + 5; //Math.floor((Math.random()*50)+21);
+this.speed = this.type *sizeConfig.fallenObjects.speedMulti + sizeConfig.fallenObjects.speedConst; //Math.floor((Math.random()*50)+21);
 }
 
 function calculateXPos (latestXPos) {
-    var x =  Math.floor((Math.random()*700)+1);
+    var widthObj = sizeConfig.fallenObjects.width;
+    var zone = sizeConfig.canvasWidth - widthObj;
+    var x =  Math.floor((Math.random()*zone)+1);
     for (var j = 0; j < latestXPos.length; j++) {
-        if (((x>= latestXPos[j]) && (x <= (latestXPos[j] +100))) || ((latestXPos[j]>= x) && (latestXPos[j] <= (x +100)))) {
-            x = x +100;
-            if (x > 700)
+        if (((x>= latestXPos[j]) && (x <= (latestXPos[j] +widthObj))) || ((latestXPos[j]>= x) && (latestXPos[j] <= (x +widthObj)))) {
+            x = x +widthObj;
+            if (x > zone)
                 x = 0;
         }
     }
@@ -57,33 +59,39 @@ function putIfNotAlreadyInList(val, list) {
 
 
 function drawFallenObjects(ctx, listFallenObject, listSuppression) {
+    var widthObj = sizeConfig.fallenObjects.width;
+    var bottomLine = sizeConfig.heightGameZone + sizeConfig.heightUpMargin;
     for (var j = 0; j < listFallenObject.length; j++) {
         var obj = listFallenObject[j]
         switch (obj.type)
         {
             case Types.COTON:
-            ctx.drawImage(coton,obj.posX,obj.posY, 100, 92);
+            var cotonHeight = sizeConfig.fallenObjects.cotonHeight;
+            ctx.drawImage(coton,obj.posX,obj.posY, widthObj, cotonHeight);
             obj.posY = obj.posY + obj.speed;
-            if (obj.posY > 670) {
+            if (obj.posY > (bottomLine - cotonHeight + sizeConfig.fallenObjects.cotonHShift)) {
                 //listSuppression.push(j);
                 if (putIfNotAlreadyInList(j, listSuppression))
                     resetCombo();
             }
             break;
             case Types.POLYSTYRENE:
-            ctx.drawImage(polystyrene,obj.posX,obj.posY, 100, 70);
+            var polystyreneHeight = sizeConfig.fallenObjects.polystyreneHeight;
+            ctx.drawImage(polystyrene,obj.posX,obj.posY, widthObj, polystyreneHeight);
             obj.posY = obj.posY + obj.speed;
-            if (obj.posY > 684) {
+            if (obj.posY > (bottomLine - polystyreneHeight + sizeConfig.fallenObjects.polystyreneShift)) {
                 //listSuppression.push(j);
                 if (putIfNotAlreadyInList(j, listSuppression))
                     resetCombo();
             }
             break;
             case Types.PELOTE:
-            ctx.drawImage(pelote,obj.posX,obj.posY, 100, 115);
+            
+            var peloteHeight = sizeConfig.fallenObjects.peloteHeight;
+            ctx.drawImage(pelote,obj.posX,obj.posY, widthObj, peloteHeight);
             obj.posY = obj.posY + obj.speed;
             //639
-            if (obj.posY > 649) {
+            if (obj.posY > (bottomLine - peloteHeight + sizeConfig.fallenObjects.peloteShift)) {
                 //listSuppression.push(j);
                 if (putIfNotAlreadyInList(j, listSuppression))
                     resetCombo();
