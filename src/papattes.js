@@ -36,22 +36,6 @@ function fisOnPaw(x, y) {
     }
 }
 
-/*function isStillOnPaw (x, y) {
-    //On évalue pas x
-    if(papatte.isActive()) {
-        var widthPaw = sizeConfig.paws.width;
-        var heightPaw = sizeConfig.paws.height;
-        var marginHeight = sizeConfig.heightUpMargin;
-        var GameZoneHeight = sizeConfig.heightGameZone;
-        var upPaw = GameZoneHeight + marginHeight - heightPaw;
-        if (y >= upPaw && y <= (upPaw + heightPaw))
-            isOnPaw = true;
-        else
-            isOnPaw = false;
-    }
-}*/
-
-
 
 function handleMove (evt) {
     

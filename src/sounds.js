@@ -6,6 +6,7 @@ soundOff.src = '../img/no-audio.png';
 window.addEventListener('click', HandleClick, false);
 
 var isMute = false;
+var indPoolPlop = 1;
 
 function drawSound(ctx) {
     if(!isTouchScreen) {
@@ -48,16 +49,11 @@ var soundValue = (isMute ? 1:0);
 
 function createPlop () {
     if(!isMute) {
-         var sonPlop = document.createElement('audio');
-         var source1 = document.createElement('source');
-         source1.src = '../son/Blup.ogg';
-         source1.type = 'audio/ogg';
-         sonPlop.appendChild(source1);
-         var source2 = document.createElement('source');
-         source2.src = '../son/Blup.mp3';
-         source2.type = 'audio/mpeg'
-         sonPlop.appendChild(source2);
-         sonPlop.play();
+         var son = document.getElementById("PoolBlup"+indPoolPlop);
+         son.play();
+         indPoolPlop++;
+         if (indPoolPlop >3)
+            indPoolPlop =1;
      }
 
 }

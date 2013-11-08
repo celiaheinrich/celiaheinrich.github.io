@@ -35,7 +35,10 @@ function initialiser () {
     coton.src = '../img/coton.png';
     pelote.src = '../img/pelote.png'
     polystyrene.src = '../img/poly.png'
-    punaise.src = '../img/punaises.png'
+    if (isTouchScreen)
+        punaise.src = '../img/punaises-phone.png'
+    else
+        punaise.src = '../img/punaises.png'
     spriteSheet.src = '../img/papattes-sprite.png';
     
         
@@ -58,8 +61,6 @@ function initialiser () {
 
 function handleStart (evt) {
     evt.preventDefault();
-    //au cas où
-    isTouchScreen = true;
     var touches = evt.changedTouches;
     touchPosXPaw = touches[0].pageX - canvas.offsetLeft;
     var x = touches[0].pageX - canvas.offsetLeft;

@@ -3,17 +3,25 @@ var isTouchScreen = false;
 var touchPosXPaw = -1;
 var isOnPaw = false;
 
-function fullScreenMode(element) {
-        if(element.requestFullScreen) {
-                element.requestFullScreen();
-        } else if(element.webkitRequestFullScreen) {
-                element.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-        } else if(element.mozRequestFullScreen){
-                element.mozRequestFullScreen();
-        } else {
-                alert('Full screen does not work');
-        }
-}
+var isPhone = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i) ? true : false;
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i) ? true : false;
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i) ? true : false;
+    },
+    any: function() {
+        return (isPhone.Android() || isPhone.BlackBerry() || isPhone.iOS() || isPhone.Windows());
+    }
+};
+
+
 
 
 function createCanvas (){
@@ -27,16 +35,6 @@ function createCanvas (){
         sizeConfig = configMedium;
     else {
         sizeConfig = configMin;
-        isTouchScreen = true;
-        isMute = true;
-        //document.getElementById('canvas').style.top = (h-sizeConfig.canvasWidth)/2+'px';
-        //ajout du css spécifique
-        /*var css = document.createElement("link");
-        css.type = "text/css";
-        css.rel = "stylesheet";
-        css.href = "../src/phone.css";
-        document.head.appendChild(css);*/
-
    }
     var c = document.createElement('canvas');
     var content = document.getElementById("content");
@@ -45,9 +43,11 @@ function createCanvas (){
     c.height = sizeConfig.canvasWidth;
     content.appendChild(c);
     
-    if(isTouchScreen) {
+    if (isPhone.any()) {
         c.style.top = (window.innerHeight-sizeConfig.canvasWidth)/2+'px';
         c.style.left = (window.innerWidth-sizeConfig.canvasWidth)/2+'px';
+        isTouchScreen = true;
+        isMute = true;
     }
 }
 

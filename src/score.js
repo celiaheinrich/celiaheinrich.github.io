@@ -135,13 +135,15 @@ function calculateLife(papatte, listTack, listTackSuppression, ctx) {
              }
         }
         if (lostlife && papatte.lifes > 0) {
-            var son = document.getElementById("FXScratch");
-            son.play();
-            papatte.lifes = papatte.lifes-1;
-            papatte.isWell = false;
-            papatte.state = States.HURT_BEG;
-            setTimeout(function () {var son2 = document.getElementById("DialHurt");
-            var qqch = son2.play(); console.log(son2); console.log(qqch);}, 300);
+            if(!isMute) {
+                var son = document.getElementById("FXScratch");
+                son.play();
+                papatte.lifes = papatte.lifes-1;
+                papatte.isWell = false;
+                papatte.state = States.HURT_BEG;
+                setTimeout(function () {var son2 = document.getElementById("DialHurt");
+                var qqch = son2.play(); console.log(son2); console.log(qqch);}, 300);
+            }
             
 
         }
